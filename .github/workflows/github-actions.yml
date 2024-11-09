@@ -11,18 +11,18 @@ jobs:
     - name: Build and tag Docker image
       run: |
         docker build -t python-app:latest .
-deploy:
-  runs-on: [self-hosted]
-  needs: build
-  if: github.ref == 'refs/heads/main'
-  steps:
-   - name: Deploy to server
-     uses: appleboy/ssh-action@v0.1.7
-     with:
-       host: ${{ secrets.SSH_HOST }}
-       username: ${{ secrets.SSH_USERNAME }}
-       key: ${{ secrets.SSH_KEY }}
-       script: |
-         cd /home/locjdev/auto
-         docker-compose down
-         docker-compose up -d        
+  deploy:
+    runs-on: [self-hosted]
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+     - name: Deploy to server
+       uses: appleboy/ssh-action@v0.1.7
+       with:
+         host: ${{ secrets.SSH_HOST }}
+         username: ${{ secrets.SSH_USERNAME }}
+         key: ${{ secrets.SSH_KEY }}
+         script: |
+           cd /home/locjdev/auto
+           docker-compose down
+           docker-compose up -d        
