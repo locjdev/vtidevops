@@ -1,5 +1,4 @@
-
-n:
+on:
   push:
     branches:
       - main
@@ -24,6 +23,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/duongmn/auto
+            cd /home/locjdev/auto
             docker-compose down
             docker-compose up -d
